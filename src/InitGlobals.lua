@@ -5,19 +5,23 @@
 --
 ---Глобалки
 TIMER_PERIOD = 0.03125
-
+--wGeometry={}
 do
 	local InitGlobalsOrigin = InitGlobals -- записываем InitGlobals в переменную
 	function InitGlobals()
 		InitGlobalsOrigin() -- вызываем оригинальную InitGlobals из переменной
 		InitGameCore()
-
 	end
 end
 
 function InitGameCore()
+	print("allOk")
+	local hero=CreateUnit(Player(0), FourCC('H000'), GetPlayerStartLocationX(Player(0)), GetPlayerStartLocationY(Player(0)), 0)
+	local Vector3 = wGeometry.Vector3
+	local c = Vector3:copyFromUnit(hero)
 
+	TimerStart(CreateTimer(), 1, true, function()
+		c:hermite(10, 0.5):applyToUnit(hero)
+		print(1)
+	end)
 end
-
-
-
